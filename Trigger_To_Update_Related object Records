@@ -1,0 +1,20 @@
+/* Create the record on related object useing trigger.
+ * if the consultant type='Employee' and salary>10000 create the record on Past_Information__c with the Name='Background check'.
+ */
+trigger PastinformationCreation on consultant__c (after insert) {
+    // list is created to avoide the governer limit.
+    list<Past_Information__c> plist= new list<Past_Information__c>();
+    for(consultant__c c:trigger.new)
+    {
+        if(c.Type__c=='Employee' && c.salary__c>10000)
+        {
+           Past_Information__c p =new Past_Information__c ();
+           p.Name__c='Background check';
+           // consultant is MD field.
+           p.consultant__c=c.id; 
+           plist.add(p);         
+        }
+    }
+   insert plist;
+
+}
