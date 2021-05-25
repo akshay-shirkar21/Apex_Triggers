@@ -1,0 +1,14 @@
+// Write a trigger to avoid the deletion of consultat record if type=='Employee' and status=='Approved'
+// Error (you cannot delete permant employee)
+
+trigger AvoidTheDeletionOfEmployee on consultant__c (before Delete) {
+    // Get the older version of the records useing trigger.old  
+    for(consultant__c c:Trigger.old)
+      {
+          if(c.type__c=='Employee' && c.Status__c=='Approved')
+          {
+              c.addError('You cannot delete permanent employee');
+          }
+      }
+          
+}
