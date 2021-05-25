@@ -1,0 +1,19 @@
+/*  Write a trigger to create contact record if account rating =='cold' and industry =='education', the last name of the child contact record
+ * must be same as the account's name   
+ */ 
+
+trigger CreateContactChildRecod on Account (after insert) {
+    list<Contact> conList = new list<Contact> ();
+    for(Account acc:trigger.new)
+    {
+        if(acc.rating=='cold' && acc.industry=='education')
+        {
+            Contact c=new Contact ();
+            c.LastName=acc.name;
+            c.AccountId=acc.Id;
+            conList.add(c);
+        }
+        
+    }
+    insert conList;
+}
