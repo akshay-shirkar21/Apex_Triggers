@@ -16,7 +16,7 @@ public class ToUpdateAccountActive {
 
 
 ************************** - Apex Trigger - **********************************
-// Update the active field on account to 'yes' if an account record is created with the rating ='cold'
+// Update the active field on account to 'yes' if an account record is created with the Website='www.tcs.com'
 trigger UpdateTheAccountActiveToYes on Account (before insert) {
   
 ToUpdateAccountActive.UpdateActiveToYes(Trigger.new);
