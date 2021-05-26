@@ -1,0 +1,23 @@
+*************************- Apex class - ***************************************
+public class ToUpdateAccountActive {
+    public static void UpdateActiveToYes(List<Account>Acclist)
+    {
+     for(Account acc:Acclist)
+     {
+      if(acc.rating=='cold')
+      {
+         acc.website='www.tcs.com'; 
+      }
+      }   
+        
+    }
+
+}
+
+
+************************** - Apex Trigger - **********************************
+// Update the active field on account to 'yes' if an account record is created with the rating ='cold'
+trigger UpdateTheAccountActiveToYes on Account (before insert) {
+  
+ToUpdateAccountActive.UpdateActiveToYes(Trigger.new);
+}
